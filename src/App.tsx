@@ -1,8 +1,7 @@
 import { useState } from "react";
-import heroImg from "./assets/hero.png";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "./assets/vite.svg";
 import "./App.css";
+import * as constants from "./constants.ts";
+import TwelveHourBlock from "./TwelveHourBlock.tsx";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -14,58 +13,21 @@ function App() {
     "#3471eb",
   ];
 
-  const hours: string[] = [
-    "12",
-    "1",
-    "2",
-    "3",
-    "4",
-    "5",
-    "6",
-    "7",
-    "8",
-    "9",
-    "10",
-    "11",
-  ];
-  const minutes: string[] = ["00", "30"];
-  const weekdays: string[] = [
-    "Sunday",
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-  ];
-
   return (
     <>
       <section id="center">
         <table className="calendar">
-          <tr>
-            {weekdays.map((day) => (
-              <th className="column">{day}</th>
-            ))}
-          </tr>
-          {hours.map((hour) => (
+          <thead>
             <tr>
-              {weekdays.map((day) => (
-                <td className="column">
-                  {minutes.map((minute) => (
-                    <tr>
-                      <td className="cell">
-                        {hour}:{minute}am
-                      </td>
-                      <td className="cell">
-                        {hour}:{minute}pm
-                      </td>
-                    </tr>
-                  ))}
-                </td>
+              {constants.weekdays.map((day) => (
+                <th className="column">{day}</th>
               ))}
             </tr>
-          ))}
+          </thead>
+          <tbody>
+            {TwelveHourBlock("am")}
+            {TwelveHourBlock("pm")}
+          </tbody>
         </table>
         <button
           type="button"

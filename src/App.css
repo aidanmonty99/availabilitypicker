@@ -213,6 +213,12 @@ tr {
   width: 150px;
 }
 
+tbody {
+  display: block;
+  max-height: 600px;
+  overflow-y: scroll;
+}
+
 /* .calendar {
   display: flex;
   justify-content: center;

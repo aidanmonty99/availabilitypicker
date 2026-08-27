@@ -5,7 +5,7 @@
   color: var(--accent);
   background: var(--accent-bg);
   border: 2px solid transparent;
-  transition: border-color 0.3s;
+  transition: background-color 0.3s, border-color 0.3s;
   margin-bottom: 24px;
 
   &:hover {
@@ -182,3 +182,38 @@
     border-right-color: var(--border);
   }
 }
+
+th, td {
+  /* Outlines every individual header and data cell */
+  border: 1px solid black; 
+  /* Optional: Adds space inside each cell for readability */
+  padding: 8px; 
+  text-align: center; /* Options: left, center, right, justify */
+  /* display: flex; */
+  /* align-items: center; Centers the tr elements horizontally */
+}
+
+table {
+  flex-direction: column;
+  display: flex;
+  align-items: center; /* Centers the tr elements horizontally */
+  border-collapse: collapse; 
+}
+
+tr {
+  display: flex; /* Removes strict table-row restrictions */
+  width: max-content; /* Shrinks the row to fit its content */
+}
+
+.cell {
+  width: 30%;
+}
+
+.column {
+  width: 150px;
+}
+
+/* .calendar {
+  display: flex;
+  justify-content: center;
+} */

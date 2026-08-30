@@ -187,13 +187,12 @@
 }
 
 .table-wrapper {
-  border: 1px solid black;
   border-radius: 10px;
   max-height: 90vh;
   overflow: hidden;
 }
 
-table {
+.calendar {
   flex-direction: column;
   display: flex;
   align-items: center; /* Centers the tr elements horizontally */
@@ -202,16 +201,16 @@ table {
   overflow-x: hidden;
   scrollbar-gutter: stable;
   box-sizing: border-box;
-  background: transparent;
+  background-color: var(--bg);
   border-spacing: 0;
 }
 
-table::-webkit-scrollbar {
+.calendar::-webkit-scrollbar {
   width: 8px;
 }
 
 /* Track */
-table::-webkit-scrollbar-track {
+.calendar::-webkit-scrollbar-track {
   box-shadow: inset 0 0 6px rgba(255, 255, 255);
   -webkit-border-radius: 10px;
   border-radius: 10px;
@@ -219,7 +218,7 @@ table::-webkit-scrollbar-track {
 }
 
 /* Handle */
-table::-webkit-scrollbar-thumb {
+.calendar::-webkit-scrollbar-thumb {
   -webkit-border-radius: 10px;
   border-radius: 10px;
   background: rgb(197, 197, 197);
@@ -253,8 +252,13 @@ tr {
   width: max-content; /* Shrinks the row to fit its content */
 }
 
-.cell {
+.interior-cell {
   border: 0.5px solid rgb(225, 225, 225);
+}
+
+.exterior-cell {
+  border-top: 0.5px solid rgb(225, 225, 225);
+  border-bottom: 0.5px solid rgb(225, 225, 225);
 }
 
 .column {

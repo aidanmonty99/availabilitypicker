@@ -6,18 +6,24 @@ function TwelveHourBlock(meridian: "am" | "pm") {
     <>
       {constants.hours.map((hour) => (
         <tr>
-          {constants.weekdays.map((day) => (
-            <td className="column cell">
-              {constants.minutes.map((minute) => (
-                <tr className="column cell">
-                  <td className="column">
-                    {hour}:{minute}
-                    {meridian}
-                  </td>
-                </tr>
-              ))}
-            </td>
-          ))}
+          {constants.weekdays.map((day) => {
+            const cellType =
+              day === "Sunday" || day === "Saturday"
+                ? "exterior-cell"
+                : "interior-cell";
+            return (
+              <td className="column">
+                {constants.minutes.map((minute) => (
+                  <tr className="column">
+                    <td className={`column ${cellType}`}>
+                      {hour}:{minute}
+                      {meridian}
+                    </td>
+                  </tr>
+                ))}
+              </td>
+            );
+          })}
         </tr>
       ))}
     </>

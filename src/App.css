@@ -5,7 +5,9 @@
   color: var(--accent);
   background: var(--accent-bg);
   border: 2px solid transparent;
-  transition: background-color 0.3s, border-color 0.3s;
+  transition:
+    background-color 0.3s,
+    border-color 0.3s;
   margin-bottom: 24px;
 
   &:hover {
@@ -63,6 +65,7 @@
   place-content: center;
   place-items: center;
   flex-grow: 1;
+  margin-top: 3%;
 
   @media (max-width: 1024px) {
     padding: 32px 20px 24px;
@@ -167,7 +170,7 @@
 
   &::before,
   &::after {
-    content: '';
+    content: "";
     position: absolute;
     top: -4.5px;
     border: 5px solid transparent;
@@ -183,21 +186,30 @@
   }
 }
 
-th, td {
+th,
+td {
   /* Outlines every individual header and data cell */
-  border: 1px solid black; 
+  border: 1px solid black;
   /* Optional: Adds space inside each cell for readability */
-  padding: 8px; 
+  padding: 8px;
   text-align: center; /* Options: left, center, right, justify */
   /* display: flex; */
   /* align-items: center; Centers the tr elements horizontally */
+}
+
+thead {
+  position: sticky;
+  top: 0;
+  background-color: var(--bg);
 }
 
 table {
   flex-direction: column;
   display: flex;
   align-items: center; /* Centers the tr elements horizontally */
-  border-collapse: collapse; 
+  border-collapse: collapse;
+  overflow-y: scroll;
+  scrollbar-gutter: stable;
 }
 
 tr {
@@ -216,7 +228,6 @@ tr {
 tbody {
   display: block;
   max-height: 600px;
-  overflow-y: scroll;
 }
 
 /* .calendar {

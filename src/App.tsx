@@ -16,19 +16,21 @@ function App() {
   return (
     <>
       <section id="center">
-        <table className="calendar">
-          <thead>
-            <tr>
-              {constants.weekdays.map((day) => (
-                <th className="column">{day}</th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {TwelveHourBlock("am")}
-            {TwelveHourBlock("pm")}
-          </tbody>
-        </table>
+        <div className="table-wrapper">
+          <table className="calendar">
+            <thead>
+              <tr>
+                {constants.weekdays.map((day) => (
+                  <th className="column">{day}</th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {TwelveHourBlock("am")}
+              {TwelveHourBlock("pm")}
+            </tbody>
+          </table>
+        </div>
         <button
           type="button"
           className="counter"

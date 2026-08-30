@@ -7,11 +7,13 @@ function TwelveHourBlock(meridian: "am" | "pm") {
       {constants.hours.map((hour) => (
         <tr>
           {constants.weekdays.map((day) => (
-            <td className="column">
+            <td className="column cell">
               {constants.minutes.map((minute) => (
-                <tr className="cell">
-                  {hour}:{minute}
-                  {meridian}
+                <tr className="column cell">
+                  <td className="column">
+                    {hour}:{minute}
+                    {meridian}
+                  </td>
                 </tr>
               ))}
             </td>

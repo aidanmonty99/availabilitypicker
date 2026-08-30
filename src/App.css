@@ -186,21 +186,11 @@
   }
 }
 
-th,
-td {
-  /* Outlines every individual header and data cell */
+.table-wrapper {
   border: 1px solid black;
-  /* Optional: Adds space inside each cell for readability */
-  padding: 8px;
-  text-align: center; /* Options: left, center, right, justify */
-  /* display: flex; */
-  /* align-items: center; Centers the tr elements horizontally */
-}
-
-thead {
-  position: sticky;
-  top: 0;
-  background-color: var(--bg);
+  border-radius: 10px;
+  max-height: 90vh;
+  overflow: hidden;
 }
 
 table {
@@ -209,7 +199,53 @@ table {
   align-items: center; /* Centers the tr elements horizontally */
   border-collapse: collapse;
   overflow-y: scroll;
+  overflow-x: hidden;
   scrollbar-gutter: stable;
+  box-sizing: border-box;
+  background: transparent;
+  border-spacing: 0;
+}
+
+table::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Track */
+table::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(255, 255, 255);
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  z-index: -1;
+}
+
+/* Handle */
+table::-webkit-scrollbar-thumb {
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  background: rgb(197, 197, 197);
+  z-index: -1;
+  /* box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5); */
+}
+
+th {
+  /* Outlines every individual header and data cell */
+  border-bottom: 1px solid black;
+  /* Optional: Adds space inside each cell for readability */
+  /* padding: 8px; */
+  text-align: center; /* Options: left, center, right, justify */
+  /* display: flex; */
+  /* align-items: center; Centers the tr elements horizontally */
+}
+
+td {
+  padding: 0px;
+  text-align: center;
+}
+
+thead {
+  position: sticky;
+  top: 0;
+  background-color: var(--bg);
 }
 
 tr {
@@ -218,7 +254,7 @@ tr {
 }
 
 .cell {
-  width: 30%;
+  border: 0.5px solid rgb(225, 225, 225);
 }
 
 .column {

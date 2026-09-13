@@ -1,7 +1,6 @@
 import { useState } from "react";
 import "./App.css";
-import * as constants from "./constants.ts";
-import TwelveHourBlock from "./TwelveHourBlock.tsx";
+import Calendar from "./Calendar.tsx";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -16,21 +15,7 @@ function App() {
   return (
     <>
       <section id="center">
-        <div className="table-wrapper">
-          <table className="calendar">
-            <thead>
-              <tr>
-                {constants.weekdays.map((day) => (
-                  <th className="column">{day}</th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {TwelveHourBlock("am")}
-              {TwelveHourBlock("pm")}
-            </tbody>
-          </table>
-        </div>
+        <Calendar />
         <button
           type="button"
           className="counter"

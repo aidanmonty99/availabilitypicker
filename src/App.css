@@ -203,6 +203,7 @@
   box-sizing: border-box;
   background-color: var(--bg);
   border-spacing: 0;
+  user-select: none;
 }
 
 .calendar::-webkit-scrollbar {

@@ -43,12 +43,10 @@ function Calendar() {
     const dataContainer = tableDataRef.current;
     if (!dataContainer) return;
     const cells = dataContainer.querySelectorAll(".cell");
-    const newlySelected = new Set<string>();
+    const selectedIds = new Set<string>();
 
     for (const cell of cells) {
       const id: string = cell.getAttribute("id");
-      if (!id || id !== "Wednesday-15:00") continue;
-
       const cellRect = cell.getBoundingClientRect();
 
       // Check overlapping boundaries
@@ -60,13 +58,14 @@ function Calendar() {
       );
 
       if (isOverlapping) {
-        newlySelected.add(id);
+        selectedIds.add(id);
+        cell.classList.add("selected");
+      } else {
+        cell.classList.remove("selected");
       }
     }
 
-    // console.log(`newlySelected: ${JSON.stringify([...newlySelected])}`);
-
-    setSelectedIds(newlySelected);
+    setSelectedIds(selectedIds);
   };
 
   const handlePointerMove = (e: React.PointerEvent<HTMLTableCellElement>) => {
@@ -87,7 +86,6 @@ function Calendar() {
 
   const handlePointerUp = () => {
     setIsSelecting(false);
-    console.log(`selectionRect: ${JSON.stringify(selectionRect)}`);
   };
 
   const scrollRef = useRef<HTMLTableRowElement>(null);

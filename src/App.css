@@ -203,17 +203,11 @@
   border-radius: 10px;
   background: rgb(197, 197, 197);
   z-index: -1;
-  /* box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5); */
 }
 
 th {
-  /* Outlines every individual header and data cell */
   border-bottom: 1px solid black;
-  /* Optional: Adds space inside each cell for readability */
-  /* padding: 8px; */
   text-align: center; /* Options: left, center, right, justify */
-  /* display: flex; */
-  /* align-items: center; Centers the tr elements horizontally */
 }
 
 .selected {
@@ -227,20 +221,27 @@ th {
   &:hover,
   &:focus-visible {
     z-index: 1;
-    outline: 2px solid var(--accent);
+    outline: 2px solid var(--accent) !important;
     border-radius: 5px;
   }
 }
 
-td {
+.cell {
   padding: 0px;
   text-align: center;
+  &:hover,
+  &:focus-visible {
+    z-index: 1;
+    outline: 1.5px solid rgb(196, 196, 196);
+    border-radius: 5px;
+  }
 }
 
 thead {
   position: sticky;
   top: 0;
   background-color: var(--bg);
+  z-index: 2;
 }
 
 tr {
@@ -265,8 +266,3 @@ tbody {
   display: block;
   max-height: 600px;
 }
-
-/* .calendar {
-  display: flex;
-  justify-content: center;
-} */

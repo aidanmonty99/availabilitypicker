@@ -4,7 +4,9 @@ import { useRef, useState, useEffect } from "react";
 
 function Calendar() {
   const tableDataRef = useRef<HTMLTableSectionElement>(null);
-  const [isSelecting, setIsSelecting] = useState(false);
+  type selectionAction = "add" | "remove" | "none";
+  const [currentSelectionAction, setSelectionAction] =
+    useState<selectionAction>("none");
   const [startPos, setStartPos] = useState({ x: 0, y: 0 });
   const [selectionRect, setSelectionRect] = useState({
     top: 0,
@@ -19,27 +21,18 @@ function Calendar() {
     if (e.button !== 0 || !tableDataRef.current) {
       return;
     }
-    if (isSelecting) {
-      setIsSelecting(false);
-      return;
-    }
-    // const rect = tableDataRef.current.getBoundingClientRect();
+    const cellIsSelected = e.currentTarget.classList.contains("selected");
+    const selectionAction: selectionAction = cellIsSelected ? "remove" : "add";
+    setSelectionAction(selectionAction);
     const x = e.clientX;
     const y = e.clientY;
 
-    console.log(`Pressed at x: ${x}, y: ${y}`);
-
-    setIsSelecting(true);
     setStartPos({ x, y });
     setSelectionRect({ top: y, bottom: y, left: x, right: x });
+    checkCollisions();
   };
 
-  const checkCollisions = (selectRect: {
-    left: number;
-    top: number;
-    right: number;
-    bottom: number;
-  }) => {
+  const checkCollisions = () => {
     const dataContainer = tableDataRef.current;
     if (!dataContainer) return;
     const cells = dataContainer.querySelectorAll(".cell");
@@ -51,16 +44,16 @@ function Calendar() {
 
       // Check overlapping boundaries
       const isOverlapping = !(
-        cellRect.left > selectRect.right ||
-        cellRect.right < selectRect.left ||
-        cellRect.top > selectRect.bottom ||
-        cellRect.bottom < selectRect.top
+        cellRect.left > selectionRect.right ||
+        cellRect.right < selectionRect.left ||
+        cellRect.top > selectionRect.bottom ||
+        cellRect.bottom < selectionRect.top
       );
 
-      if (isOverlapping) {
+      if (isOverlapping && currentSelectionAction === "add") {
         selectedIds.add(id);
         cell.classList.add("selected");
-      } else {
+      } else if (isOverlapping && currentSelectionAction === "remove") {
         cell.classList.remove("selected");
       }
     }
@@ -69,8 +62,6 @@ function Calendar() {
   };
 
   const handlePointerMove = (e: React.PointerEvent<HTMLTableCellElement>) => {
-    if (!isSelecting) return;
-    // const rect = tableDataRef.current.getBoundingClientRect();
     const currentX = e.clientX;
     const currentY = e.clientY;
 
@@ -81,11 +72,12 @@ function Calendar() {
 
     const newRect = { left, top, right, bottom };
     setSelectionRect(newRect);
-    checkCollisions(newRect);
+    checkCollisions();
   };
 
   const handlePointerUp = () => {
-    setIsSelecting(false);
+    setSelectionAction("none");
+    checkCollisions();
   };
 
   const scrollRef = useRef<HTMLTableRowElement>(null);

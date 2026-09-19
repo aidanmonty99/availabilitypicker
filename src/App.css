@@ -9,7 +9,10 @@
 
 #menu {
   width: 30px;
-  margin-left: 20px;
+  margin-left: 30px;
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 .menu-bar {
@@ -22,6 +25,14 @@
 .menu-space {
   height: 5px;
   width: 100%;
+}
+
+#account {
+  margin-right: 30px;
+  &:hover {
+    cursor: pointer;
+    text-decoration: underline;
+  }
 }
 
 #center {
@@ -46,12 +57,12 @@
 }
 
 .calendar-wrapper {
-  border-radius: 10px;
   max-height: 90vh;
   overflow: hidden;
 }
 
 .calendar {
+  border-radius: 10px;
   flex-direction: column;
   display: flex;
   align-items: center; /* Centers the tr elements horizontally */

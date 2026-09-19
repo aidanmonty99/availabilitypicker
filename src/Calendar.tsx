@@ -99,7 +99,7 @@ function Calendar() {
 
   return (
     <>
-      <div className="table-wrapper">
+      <div className="calendar-wrapper">
         <table className="calendar">
           <thead>
             <tr>

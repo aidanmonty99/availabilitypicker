@@ -17,10 +17,14 @@ function Calendar() {
   const [selectedIds, setSelectedIds] = useState<Set<string>>(
     new Set<string>(),
   );
+  const [tempSelectedIds, setTempSelectedIds] = useState<Set<string>>(
+    new Set<string>(),
+  );
   const handlePointerDown = (e: React.PointerEvent<HTMLTableCellElement>) => {
     if (e.button !== 0 || !tableDataRef.current) {
       return;
     }
+    setTempSelectedIds(new Set<string>());
     const cellIsSelected = e.currentTarget.classList.contains("selected");
     const selectionAction: selectionAction = cellIsSelected ? "remove" : "add";
     setSelectionAction(selectionAction);
@@ -36,7 +40,6 @@ function Calendar() {
     const dataContainer = tableDataRef.current;
     if (!dataContainer) return;
     const cells = dataContainer.querySelectorAll(".cell");
-    const selectedIds = new Set<string>();
 
     for (const cell of cells) {
       const id: string = cell.getAttribute("id");
@@ -50,15 +53,21 @@ function Calendar() {
         cellRect.bottom < selectionRect.top
       );
 
-      if (isOverlapping && currentSelectionAction === "add") {
-        selectedIds.add(id);
+      const addNewId = currentSelectionAction === "add" && isOverlapping;
+      const removeTempId = !isOverlapping && tempSelectedIds.has(id);
+      const removePreviousSelectedId =
+        isOverlapping && currentSelectionAction === "remove";
+
+      if (addNewId) {
+        tempSelectedIds.add(id);
         cell.classList.add("selected");
-      } else if (isOverlapping && currentSelectionAction === "remove") {
+      } else if (removeTempId || removePreviousSelectedId) {
+        tempSelectedIds.delete(id);
         cell.classList.remove("selected");
       }
     }
 
-    setSelectedIds(selectedIds);
+    setSelectedIds(tempSelectedIds);
   };
 
   const handlePointerMove = (e: React.PointerEvent<HTMLTableCellElement>) => {
@@ -78,6 +87,7 @@ function Calendar() {
   const handlePointerUp = () => {
     setSelectionAction("none");
     checkCollisions();
+    setTempSelectedIds(new Set<string>());
   };
 
   const scrollRef = useRef<HTMLTableRowElement>(null);
